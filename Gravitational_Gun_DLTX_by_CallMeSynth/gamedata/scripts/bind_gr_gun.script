@@ -17,6 +17,7 @@ function gravi_gun_binder:__init(obj)
     self.initialized = false
     self.loaded = false
     self.ggunable = {}
+    self.last_scan_time = 0
 end
 
 function gravi_gun_binder:reload(section)
@@ -55,6 +56,8 @@ function gravi_gun_binder:net_spawn(data)
     self.last_accuracy = 0
     self.last_in_slot = false
     self.ggunable = {}
+    self.last_scan_time = 0
+    self.capture_nomove_counter = 0
     self.already_registered = false
 
     return true
@@ -63,7 +66,11 @@ end
 function gravi_gun_binder:update(delta)
     object_binder.update(self, delta)
 
-    local active_item = db.actor and db.actor:active_item()
+    if not db.actor or not self.object then
+        return
+    end
+
+    local active_item = db.actor:active_item()
     local is_active = active_item and (self.object:id() == active_item:id())
 
     local ammo_elapsed = self.object:get_ammo_in_magazine()
@@ -263,6 +270,12 @@ function gravi_gun_binder:capture(cone, dist)
     if not cone then cone = 0.999 end
     if not dist then dist = 13 end
 
+    local time_now = time_global()
+    if time_now - (self.last_scan_time or 0) < 100 then
+        return
+    end
+    self.last_scan_time = time_now
+
     local back = 2
     dist = dist + back
 
@@ -280,7 +293,9 @@ function gravi_gun_binder:capture(cone, dist)
         end
     end
 
-    level.iterate_nearest(db.actor:position(), 10, iterate_nearest)
+    if db.actor and db.actor:position then
+        level.iterate_nearest(db.actor:position(), 10, iterate_nearest)
+    end
 
     for id, _ in pairs(self.ggunable) do
         local cobj = level.object_by_id(id)
