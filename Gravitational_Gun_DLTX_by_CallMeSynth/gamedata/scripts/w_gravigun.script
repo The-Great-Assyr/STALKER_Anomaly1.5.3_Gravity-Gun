@@ -1,0 +1,8 @@
+local settings = nil
+function gravigunLoadSettings()
+    settings = {
+        ammo_limit = w_gravigun_mcm.get_config('ui_mcm_w_gravigun_rounds'),
+        fire_distance = w_gravigun_mcm.get_config('ui_mcm_w_gravigun_energy'),
+        $npc = w_gravigun_mcm.get_config('ui_mcm_w_gravigun_onpc'),
+    }
+end

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+	<string id="ui_mcm_w_gravigun_title">
+		<text>Gravitational Gun Settings Center</text>
+	</string>
+	<string id="ui_mcm_menu_w_gravigun">
+		<text>Gravigun Settings</text>
+	</string>
+	<string id="ui_mcm_w_gravigun_rounds">
+		<text>Number of rounds per magazine</text>
+	</string>
+	<string id="ui_mcm_w_gravigun_energy">
+		<text>Energy per round (how far the round will travel)</text>
+	</string>
+	<string id="ui_mcm_w_gravigun_onpc">
+		<text>NPCs can drop a Gravity Gun</text>
+	</string>
+</string_table>
