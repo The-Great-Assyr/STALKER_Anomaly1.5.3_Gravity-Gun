@@ -1,8 +1,16 @@
 local settings = nil
+
+local function safe_get_config(key, fallback)
+    if w_gravigun_mcm and w_gravigun_mcm.get_config then
+        return w_gravigun_mcm.get_config(key)
+    end
+    return fallback
+end
+
 function gravigunLoadSettings()
     settings = {
-        ammo_limit = w_gravigun_mcm.get_config('ui_mcm_w_gravigun_rounds'),
-        fire_distance = w_gravigun_mcm.get_config('ui_mcm_w_gravigun_energy'),
-        $npc = w_gravigun_mcm.get_config('ui_mcm_w_gravigun_onpc'),
+        ammo_limit = safe_get_config('ui_mcm_w_gravigun_rounds', 20),
+        fire_distance = safe_get_config('ui_mcm_w_gravigun_energy', 20),
+        npc = safe_get_config('ui_mcm_w_gravigun_onpc', 0),
     }
 end

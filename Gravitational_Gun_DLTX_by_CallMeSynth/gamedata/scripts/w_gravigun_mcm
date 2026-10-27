@@ -1,22 +1,56 @@
 local defaults = {
-    ui_mcm_w_gravigun_rounds  = 20,
-	ui_mcm_w_gravigun_energy  = 20,
-	ui_mcm_w_gravigun_onpc = 0,
+    ui_mcm_w_gravigun_rounds = 20,
+    ui_mcm_w_gravigun_energy = 20,
+    ui_mcm_w_gravigun_onpc = 0,
 }
+
 function on_mcm_load()
     return {
-        id = 'w_gravigun', sh = true, gr = {
-            {id = 'title', type= 'slide',link= "AMCM_Banner.dds",link= 'ui_options_slider_player', text='ui_mcm_w_gravigun_title', size= {512,50}, spacing= 20},
+        id = "w_gravigun",
+        sh = true,
+        gr = {
+            {
+                id = "title",
+                type = "slide",
+                link = "AMCM_Banner.dds",
+                text = "ui_mcm_w_gravigun_title",
+                size = {512, 50},
+                spacing = 20
+            },
             {id = "line", type = "line"},
-            {id = 'ui_mcm_w_gravigun_rounds', type = 'track', val = 125, min = 20, max = 250, step = 5, def = defaults.ui_mcm_w_gravigun_rounds},
+            {
+                id = "ui_mcm_w_gravigun_rounds",
+                type = "track",
+                val = 125,
+                min = 20,
+                max = 250,
+                step = 5,
+                def = defaults.ui_mcm_w_gravigun_rounds
+            },
             {id = "line", type = "line"},
-            {id = 'ui_mcm_w_gravigun_energy', type = 'track', val = 150, min = 20, max = 500, step = 5, def = defaults.ui_mcm_w_gravigun_energy},
+            {
+                id = "ui_mcm_w_gravigun_energy",
+                type = "track",
+                val = 150,
+                min = 20,
+                max = 500,
+                step = 5,
+                def = defaults.ui_mcm_w_gravigun_energy
+            },
             {id = "line", type = "line"},
-			{id = "ui_mcm_w_gravigun_onpc", type = "check", val = 0, def = defaults.ui_mcm_w_gravigun_onpc},
+            {
+                id = "ui_mcm_w_gravigun_onpc",
+                type = "check",
+                val = 0,
+                def = defaults.ui_mcm_w_gravigun_onpc
+            },
         }
     }
 end
 
 function get_config(key)
-    if ui_mcm then return ui_mcm.get('w_gravigun/' .. key) else return defaults[key] end
+    if ui_mcm then
+        return ui_mcm.get("w_gravigun/" .. key)
+    end
+    return defaults[key]
 end
